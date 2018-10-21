@@ -3,25 +3,23 @@
 <!doctype html>
 <html>
 <head>
-<title>Talker</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-<script type="text/javascript" src="/static/js/play_audio.js"></script>
-<!--TODO create a box slider to display icons horizontally-->
-<!--TODO create a phrase bar where user adds words to a sentence-->
+    <title>Talker</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!--TODO create a box slider to display icons horizontally-->
+    <!--TODO create a phrase bar where user adds words to a sentence-->
 </head>
 <body>
 <h1>Talker</h1>
 <p>Click the picture to hear a word.</p>
-<p>
-  <!--<a href="#" onmousedown="help.play()"><img src="{% static 'images/help.jpg' %}" alt="help" height="400"/></a>-->
-  <!--<a href="#" onmousedown="come.play()"><img src="{% static 'images/come.jpg' %}" alt="come" height="400"/></a>-->
-  <table><tr>
-  {% for img in images %}
-    <td><a href="javascript:void(0)" onmousedown={{img.click}}> <img src=" {% static img.source %}" height="50%" /></a></td>
-  {% endfor %}
-  </tr>
-  </table>
-
-</p>
+<!--<a href="#" onmousedown="help.play()"><img src="{% static 'images/help.jpg' %}" alt="help" height="400"/></a>-->
+<!--<a href="#" onmousedown="come.play()"><img src="{% static 'images/come.jpg' %}" alt="come" height="400"/></a>-->
+<table>
+    <tr>
+        {% for wi in word_images %}
+            <td><img class="words" data-word="{{ wi.word }}" alt="{{ wi.word }}" src="{% static wi.image_url %}" height="50%" /></td>
+        {% endfor %}
+    </tr>
+</table>
+<script type="text/javascript" src="/static/js/play_audio.js"></script>
 </body>
 </html>
