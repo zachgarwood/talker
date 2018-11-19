@@ -43,22 +43,21 @@ def seed_pictograms(apps, schema_editor):
         file_path = path.join(root, directory, file_name)
         return File(open(file_path, 'rb'))
 
-    def copy_files_to_destination(files, destination_root):
+    def upload_files(files):
         """
-        "Copy" the pictogram files by resetting the files' `name` property.
-
-        Remove the ORIGIN_DIR from the file's path to place them in the
-        MEDIA_ROOT.
+        "Upload" the pictogram files by resetting the files' `name` property to
+        just the file name, stripping out the path.
         """
         for media_file in files:
-            media_file.name = path.normpath(media_file.name.replace(ORIGIN_DIR, ''))
+            _, file_name = path.split(media_file.name)
+            media_file.name = file_name
 
     Pictogram = apps.get_model('ui', 'Pictogram')
     for pictogram_text in PICTOGRAMS:
         audio_file = get_media_file(ORIGIN_ROOT, pictogram_text, *MEDIA_AUDIO)
         image_file = get_media_file(ORIGIN_ROOT, pictogram_text, *MEDIA_IMAGE)
         pictogram = Pictogram(audio=audio_file, image=image_file, text=pictogram_text)
-        copy_files_to_destination([pictogram.audio, pictogram.image], settings.MEDIA_ROOT)
+        upload_files([pictogram.audio, pictogram.image])
         pictogram.save()
 
 

@@ -127,5 +127,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Managing fields
 # https://docs.djangoproject.com/en/2.1/topics/files/
 
-MEDIAL_URL = '/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
