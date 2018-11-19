@@ -1,13 +1,13 @@
 function initTouchListeners() {
     console.log("starting init");
-    var link_elements = document.getElementsByClassName("words");
+    var link_elements = document.getElementsByClassName("pictograms");
     for(var i = 0; i < link_elements.length; i++)
     {
         var el = link_elements.item(i);
-        var word = el.dataset.word; // use the data-word attribute from the HTML
         el.addEventListener("touchstart", function(){handleClick(this);}, false);
         el.addEventListener("click", function(){handleClick(this);}, false);
-        console.log("added listeners to "+word);
+        // use the data-pictogram-text attribute from the HTML
+        console.log("added listeners to "+el.dataset.pictogramText);
         // Other touch events:
         // el.addEventListener("touchstart", handleClick, false);
         // el.addEventListener("touchend", handleEnd, false);
@@ -18,11 +18,10 @@ function initTouchListeners() {
 }
 
 function handleClick(el) {
-    var word = el.dataset.word;
     var audio = document.createElement('audio');
-    audio.setAttribute("src", "../static/audio/"+word+".m4a");
+    audio.setAttribute("src", el.dataset.pictogramAudioUrl);
     audio.play();
-    console.log("clicked "+word);
+    console.log("clicked "+el.dataset.pictogramText);
 }
 
 initTouchListeners();

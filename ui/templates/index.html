@@ -1,5 +1,4 @@
-
-{% load staticfiles %}
+{% load static %}
 <!doctype html>
 <html>
 <head>
@@ -9,17 +8,23 @@
     <!--TODO create a phrase bar where user adds words to a sentence-->
 </head>
 <body>
-<h1>Talker</h1>
-<p>Click the picture to hear a word.</p>
-<!--<a href="#" onmousedown="help.play()"><img src="{% static 'images/help.jpg' %}" alt="help" height="400"/></a>-->
-<!--<a href="#" onmousedown="come.play()"><img src="{% static 'images/come.jpg' %}" alt="come" height="400"/></a>-->
-<table>
-    <tr>
-        {% for wi in word_images %}
-            <td><img class="words" data-word="{{ wi.word }}" alt="{{ wi.word }}" src="{% static wi.image_url %}" height="50%" /></td>
-        {% endfor %}
-    </tr>
-</table>
-<script type="text/javascript" src="/static/js/play_audio.js"></script>
+    <h1>Talker</h1>
+    <p>Click the picture to hear a word.</p>
+    <table>
+        <tr>
+            {% for pictogram in pictograms %}
+                <td>
+                    <img
+                        alt="{{ pictogram.text }}"
+                        class="pictograms"
+                        data-pictogram-text="{{ pictogram.text }}"
+                        data-pictogram-audio-url="{{ pictogram.audio.url }}"
+                        height="50%"
+                        src="{{ pictogram.image.url }}"/>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+    <script type="text/javascript" src="/static/js/play_audio.js"></script>
 </body>
 </html>
