@@ -17,3 +17,6 @@ class Pictogram(models.Model):
                               validators=[validate_image_file_extension])
     text = models.CharField(help_text='The text version of the pictogram',
                             max_length=255)
+
+    def __str__(self):
+        return self.text
